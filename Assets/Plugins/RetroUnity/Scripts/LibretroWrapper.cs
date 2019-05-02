@@ -56,7 +56,8 @@ namespace RetroUnity {
             RetroPixelFormatUnknown = int.MaxValue
         }
 
-        private void Start() {
+        private void Start()
+        {
             _speaker = GameObject.Find("Speaker").GetComponent<Speaker>();
         }
 
@@ -149,6 +150,7 @@ namespace RetroUnity {
             private Libretro.RetroAudioSampleBatchDelegate _audioSampleBatch;
             private Libretro.RetroInputPollDelegate _inputPoll;
             private Libretro.RetroInputStateDelegate _inputState;
+
             public Wrapper(string coreToLoad) {
                 Libretro.InitializeLibrary(coreToLoad);
             }

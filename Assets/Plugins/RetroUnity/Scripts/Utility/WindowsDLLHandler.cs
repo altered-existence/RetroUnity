@@ -44,7 +44,8 @@ namespace RetroUnity.Utility {
             }
         }
 
-        public bool LoadCore(string dllPath) {
+        public bool LoadCore(string dllPath)
+        {
             _dllPointer = LoadLibrary(dllPath);
 
             if (_dllPointer == IntPtr.Zero) {

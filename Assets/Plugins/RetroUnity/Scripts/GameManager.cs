@@ -5,16 +5,19 @@ using UnityEngine;
 namespace RetroUnity {
     public class GameManager : MonoBehaviour {
 
-        [SerializeField] private string CoreName = "snes9x_libretro.dll";
-        [SerializeField] private string RomName = "Chrono Trigger (USA).sfc";
+        [SerializeField] public string CoreName = "";
+        [SerializeField] public string RomName = "";
         private LibretroWrapper.Wrapper wrapper;
 
         private float _frameTimer;
 
-        public Renderer Display;
+        public Material Display;
+        
+        public string romPath; // To change which path ROMs are loaded from. For use with multiple cores.
 
         private void Awake() {
-            LoadRom(Application.streamingAssetsPath + "/" + RomName);
+            romPath = (Application.streamingAssetsPath + "/roms");
+            LoadRom(romPath + "/" + RomName); // Call from External Script/UI
         }
 
         private void Update() {
@@ -29,7 +32,7 @@ namespace RetroUnity {
                 }
             }
             if (LibretroWrapper.tex != null) {
-                Display.material.mainTexture = LibretroWrapper.tex;
+                Display.mainTexture = LibretroWrapper.tex;
             }
         }
 
@@ -43,9 +46,9 @@ namespace RetroUnity {
                 return;
             }
 #endif
-            Display.material.color = Color.white;
+            Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/" + CoreName);
+            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreName);
 
             wrapper.Init();
             wrapper.LoadGame(path);
