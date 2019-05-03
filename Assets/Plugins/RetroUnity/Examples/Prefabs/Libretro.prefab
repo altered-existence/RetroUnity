@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa23bc7544cb7424d82395ceb802c073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coreName: 
 --- !u!114 &9194085832361661892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,10 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ea678dff3796c4c92ab162cb5764bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoreName: genesis_plus_gx_libretro.dll
-  RomName: genesis/Herzog Zwei.smd
-  Display: {fileID: 2100000, guid: ea16435dffa3e34408933b59f313504c, type: 2}
-  romPath: roms
+  CoreName: snes9x_libretro.dll
+  RomName: snes/Aladdin.smc
+  Display: {fileID: 2100000, guid: 319ed50ef78535641864f2e143df0ea5, type: 2}
+  DisplayTexture: {fileID: 8400000, guid: 5e6f6f122c9b27b4bbc9aee2204bfbdf, type: 2}
+  corePath: 
+  romPath: 
 --- !u!114 &9194085832361661891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,3 +82,5 @@ MonoBehaviour:
   RomInput: {fileID: 0}
   RomInputText: {fileID: 0}
   gameManager: {fileID: 9194085832361661892}
+  platformInfo: 
+  platformInfoText: {fileID: 0}

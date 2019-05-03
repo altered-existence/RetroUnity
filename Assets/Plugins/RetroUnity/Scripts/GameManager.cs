@@ -1,23 +1,34 @@
 ﻿using System.IO;
 using RetroUnity.Utility;
 using UnityEngine;
+using AltX.Utilities;
+using AltX.UI;
 
 namespace RetroUnity {
     public class GameManager : MonoBehaviour {
 
+        Cores cores;
+        UIManager uiManager;
         [SerializeField] public string CoreName = "";
         [SerializeField] public string RomName = "";
-        private LibretroWrapper.Wrapper wrapper;
+        [HideInInspector] public string corePath; // Future-proofing for changing Core Path at Runtime
+        public string romPath; // Change depending which core is loaded
+
+        public LibretroWrapper.Wrapper wrapper;
 
         private float _frameTimer;
 
-        public Material Display;
-        
-        public string romPath; // To change which path ROMs are loaded from. For use with multiple cores.
+        public Material Display; // Changed to Material to support 2D Renderers
+        //public Texture2D DisplayTexture; // TESTING
 
+
+        
         private void Awake() {
-            romPath = (Application.streamingAssetsPath + "/roms");
-            LoadRom(romPath + "/" + RomName); // Call from External Script/UI
+            corePath = (Application.streamingAssetsPath + "cores");
+            romPath = (Application.streamingAssetsPath + "/roms"); // SNES = roms/snes | Genesis = roms/genesis | Gameboy = roms/gb(a/c)
+            cores.GetInstalledCores();
+            uiManager.PopulateCoreList();
+            //LoadRom(romPath + "/" + RomName); // Call from External Script/UI
         }
 
         private void Update() {
@@ -33,6 +44,7 @@ namespace RetroUnity {
             }
             if (LibretroWrapper.tex != null) {
                 Display.mainTexture = LibretroWrapper.tex;
+                //DisplayTexture = LibretroWrapper.tex;
             }
         }
 
@@ -48,7 +60,7 @@ namespace RetroUnity {
 #endif
             Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreName);
+            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/" + corePath + "/" + CoreName);
 
             wrapper.Init();
             wrapper.LoadGame(path);

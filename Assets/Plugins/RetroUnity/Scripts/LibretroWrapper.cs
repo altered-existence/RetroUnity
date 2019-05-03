@@ -29,6 +29,8 @@ namespace RetroUnity {
     
         private static Speaker _speaker;
 
+        public string coreName;
+
         public static Texture2D tex;
         public static int pix;
         public static int w;
