@@ -16,13 +16,15 @@ namespace AltX.UI
         public Dropdown RomDropdownList;
         public Dropdown.OptionData[] RomDropdownOptionData;
         public InputField CoreInput;
+        public Text CoreInputText;
         public Text CoreNameText;
         public InputField RomInput;
+        public Text RomInputText;
         public GameManager gameManager;
         public LibretroWrapper.Wrapper wrapper;
 
         public string platformInfo;
-        [HideInInspector]
+        //[HideInInspector]
         public Text platformInfoText;
         //public string RetroInfo;
 
