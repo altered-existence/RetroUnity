@@ -16,31 +16,14 @@ namespace AltX.UI
         public Dropdown RomDropdownList;
         public Dropdown.OptionData[] RomDropdownOptionData;
         public InputField CoreInput;
-        private Text coreInputText;
         public Text CoreNameText;
         public InputField RomInput;
-        public Text RomInputText;
         public GameManager gameManager;
         public LibretroWrapper.Wrapper wrapper;
 
         public string platformInfo;
         [HideInInspector]
         public Text platformInfoText;
-        private Dropdown.OptionData allSelectables;
-        private char[] trim = { '.', 'd', 'l', 'l' };
-        public Text CoreInputText
-        {
-            get
-            {
-                return coreInputText;
-            }
-
-            set
-            {
-                coreInputText = value;
-            }
-        }
-
         //public string RetroInfo;
 
         void Start()
@@ -49,9 +32,10 @@ namespace AltX.UI
             platformInfo = (Application.platform).ToString();
             platformInfoText.text = platformInfo;
         }
-        public void CoreNameChanged()
+        public string CoreNameChanged()
         {
             CoreInput.text = gameManager.CoreName;
+            return CoreInput.text;
         }
         public void RomNameChanged()
         {
@@ -64,7 +48,7 @@ namespace AltX.UI
         public void OnCoreDropdownChange()
         {
             gameManager.CoreName = CoreDropdownOptionData[CoreDropdownList.value].text;
-            CoreNameChanged();
+            CoreNameText.text = CoreNameChanged().TrimEnd('_', 'l', 'i', 'b', 'r', 'e', 't', 'r', 'o', '.','d','l','l').ToUpper();
         }
         public void OnRomDropdownChange()
         {
