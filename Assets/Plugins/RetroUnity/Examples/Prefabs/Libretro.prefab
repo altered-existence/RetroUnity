@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9194085832361661894}
   - component: {fileID: 9194085832361661892}
   - component: {fileID: 9194085832361661891}
+  - component: {fileID: 934321637}
   m_Layer: 0
   m_Name: Libretro
   m_TagString: Untagged
@@ -60,10 +61,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoreName: snes9x_libretro.dll
   RomName: snes/Aladdin.smc
-  Display: {fileID: 2100000, guid: 319ed50ef78535641864f2e143df0ea5, type: 2}
-  DisplayTexture: {fileID: 8400000, guid: 5e6f6f122c9b27b4bbc9aee2204bfbdf, type: 2}
   corePath: 
   romPath: 
+  Display: {fileID: 2100000, guid: d03dbcabe115eb74aa063e1429b6b2a1, type: 2}
 --- !u!114 &9194085832361661891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1744e87818ee5bc499073efe96e41433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoreDropdownList: {fileID: 0}
   CoreInput: {fileID: 0}
   CoreInputText: {fileID: 0}
   CoreNameText: {fileID: 0}
@@ -84,3 +85,19 @@ MonoBehaviour:
   gameManager: {fileID: 9194085832361661892}
   platformInfo: 
   platformInfoText: {fileID: 0}
+--- !u!114 &934321637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194085832361661895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6e30574d256bd41876636a4a5463d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 9194085832361661892}
+  uiManager: {fileID: 9194085832361661891}
+  path: 
+  coreArrayIndex: 0
