@@ -11,11 +11,11 @@ using UnityEngine;
 
 namespace AltX.Utilities
 {
-    public class Cores : MonoBehaviour
+    public class Cores
     {
         public GameManager gameManager;
-        public UIManager uiManager;
-        public string path;
+        public static UIManager uiManager;
+        public static string path;
         public int coreArrayIndex;
 
         private static List<string> coreList = new List<string>();
@@ -35,23 +35,33 @@ namespace AltX.Utilities
 
         public void Start()
         {
-            GetPath();
 
         }
-        public void GetInstalledCores() // Check "cores" folder for cores, count them, create a string array
+        public static void GetInstalledCores() // Check "cores" folder for cores, count them, create a string array
         {
-            DirectoryInfo dir = new DirectoryInfo(path);
-            FileInfo[] info = dir.GetFiles("*.dll");
-
-            foreach (FileInfo f in info)
+            try
             {
-                //coreArrayIndex = coreArrayIndex + 1;
-                CoreList.Add(f.Name);
-                Debug.Log(f.Name);
-                //File.AppendText(Application.streamingAssetsPath + "/corelist.txt");
+                GetPath();
+                DirectoryInfo dir = new DirectoryInfo(path);
+                FileInfo[] info = dir.GetFiles("*.dll");
+
+                if(info.Length != 0)
+                {
+                    foreach (FileInfo f in info)
+                    {
+                        //coreArrayIndex = coreArrayIndex + 1;
+                        CoreList.Add(f.Name);
+                        Debug.Log(f.Name);
+                        //File.AppendText(Application.streamingAssetsPath + "/corelist.txt");
+                    }
+                }
             }
-        }
-        public string GetPath()
+            catch(Exception e)
+            {
+                Debug.Log(e);
+            }
+    }
+        public static string GetPath()
         {
             path = (Application.streamingAssetsPath + "/cores");
             return path;

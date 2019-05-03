@@ -5,9 +5,9 @@ using AltX.Utilities;
 using AltX.UI;
 
 namespace RetroUnity {
-    public class GameManager : MonoBehaviour {
-
-        Cores cores;
+    public class GameManager : MonoBehaviour
+    {
+        //readonly Cores cores;
         UIManager uiManager;
         [SerializeField] public string CoreName = "";
         [SerializeField] public string RomName = "";
@@ -24,9 +24,10 @@ namespace RetroUnity {
 
         
         private void Awake() {
-            corePath = (Application.streamingAssetsPath + "cores");
+            corePath = (Application.streamingAssetsPath + "/cores");
             romPath = (Application.streamingAssetsPath + "/roms"); // SNES = roms/snes | Genesis = roms/genesis | Gameboy = roms/gb(a/c)
-            cores.GetInstalledCores();
+            Cores.GetInstalledCores();
+            uiManager = gameObject.GetComponent<UIManager>();
             uiManager.PopulateCoreList();
             //LoadRom(romPath + "/" + RomName); // Call from External Script/UI
         }
@@ -60,7 +61,7 @@ namespace RetroUnity {
 #endif
             Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/" + corePath + "/" + CoreName);
+            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + corePath + "/" + CoreName);
 
             wrapper.Init();
             wrapper.LoadGame(path);

@@ -316,3 +316,4 @@ __pycache__/
 *.sfc
 *.sfc.meta
 Assets/StreamingAssets/snes9x_libretro.dll
+ProjectSettings/ProjectVersion.txt
