@@ -28,7 +28,6 @@ namespace RetroUnity {
     public class LibretroWrapper : MonoBehaviour {
     
         private static Speaker _speaker;
-
         public string coreName;
 
         public static Texture2D tex;
@@ -60,7 +59,7 @@ namespace RetroUnity {
 
         private void Start()
         {
-            _speaker = GameObject.Find("Speaker").GetComponent<Speaker>();
+            //_speaker = GameObject.Find("Speaker").GetComponent<Speaker>();
         }
 
         //Shouldn't be part of the wrapper, will remove later
@@ -581,9 +580,9 @@ namespace RetroUnity {
             dllHandler = AndroidDLLHandler.Instance;
 #endif
                 if (dllHandler == null) return;
-                string path = Application.streamingAssetsPath + "/" + "libwinpthread-1.dll";
-                if (File.Exists(path))
-                    dllHandler.LoadCore(path);
+                //string path = Application.streamingAssetsPath + "/" + "libwinpthread-1.dll";
+                //if (File.Exists(path))
+                //    dllHandler.LoadCore(path);
 
                 dllHandler.LoadCore(dllName);
 

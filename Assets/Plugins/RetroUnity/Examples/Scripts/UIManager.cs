@@ -13,8 +13,10 @@ namespace AltX.UI
     {
         public Dropdown CoreDropdownList;
         public Dropdown.OptionData[] CoreDropdownOptionData;
+        public Dropdown RomDropdownList;
+        public Dropdown.OptionData[] RomDropdownOptionData;
         public InputField CoreInput;
-        public Text CoreInputText;
+        private Text coreInputText;
         public Text CoreNameText;
         public InputField RomInput;
         public Text RomInputText;
@@ -25,6 +27,19 @@ namespace AltX.UI
         [HideInInspector]
         public Text platformInfoText;
         private Dropdown.OptionData allSelectables;
+        private char[] trim = { '.', 'd', 'l', 'l' };
+        public Text CoreInputText
+        {
+            get
+            {
+                return coreInputText;
+            }
+
+            set
+            {
+                coreInputText = value;
+            }
+        }
 
         //public string RetroInfo;
 
@@ -36,24 +51,35 @@ namespace AltX.UI
         }
         public void CoreNameChanged()
         {
-            gameManager.CoreName = CoreInputText.text;
+            CoreInput.text = gameManager.CoreName;
         }
-        public void ROMNameChanged()
+        public void RomNameChanged()
         {
-            gameManager.RomName = RomInputText.text;
+            RomInput.text = gameManager.RomName;
         }
         public void StartButtonPressed()
         {
             gameManager.LoadRom(gameManager.romPath + "/" + gameManager.RomName);
         }
-        public void OnDropdownChange()
+        public void OnCoreDropdownChange()
         {
             gameManager.CoreName = CoreDropdownOptionData[CoreDropdownList.value].text;
+            CoreNameChanged();
+        }
+        public void OnRomDropdownChange()
+        {
+            gameManager.RomName = RomDropdownOptionData[RomDropdownList.value].text;
+            RomNameChanged();
         }
         public void PopulateCoreList()
         {
             CoreDropdownList.AddOptions(Utilities.Cores.CoreList);
             CoreDropdownOptionData = CoreDropdownList.options.ToArray<Dropdown.OptionData>();
+        }
+        public void PopulateRomList()
+        {
+            RomDropdownList.AddOptions(Utilities.ROMs.RomList);
+            RomDropdownOptionData = RomDropdownList.options.ToArray<Dropdown.OptionData>();
         }
     }
 }
