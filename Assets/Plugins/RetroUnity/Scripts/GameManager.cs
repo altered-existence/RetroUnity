@@ -29,7 +29,7 @@ namespace RetroUnity {
             Cores.GetInstalledCores();
             uiManager = gameObject.GetComponent<UIManager>();
             uiManager.PopulateCoreList();
-            //LoadRom(romPath + "/" + RomName); // Call from External Script/UI
+            LoadRom(romPath + "/" + RomName); // Call from External Script/UI
         }
 
         private void Update() {

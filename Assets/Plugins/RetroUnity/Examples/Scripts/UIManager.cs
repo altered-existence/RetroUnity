@@ -5,12 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace AltX.UI
 {
     public class UIManager : MonoBehaviour
     {
         public Dropdown CoreDropdownList;
+        public Dropdown.OptionData[] CoreDropdownOptionData;
         public InputField CoreInput;
         public Text CoreInputText;
         public Text CoreNameText;
@@ -22,6 +24,8 @@ namespace AltX.UI
         public string platformInfo;
         [HideInInspector]
         public Text platformInfoText;
+        private Dropdown.OptionData allSelectables;
+
         //public string RetroInfo;
 
         void Start()
@@ -42,10 +46,14 @@ namespace AltX.UI
         {
             gameManager.LoadRom(gameManager.romPath + "/" + gameManager.RomName);
         }
-
+        public void OnDropdownChange()
+        {
+            gameManager.CoreName = CoreDropdownOptionData[CoreDropdownList.value].text;
+        }
         public void PopulateCoreList()
         {
             CoreDropdownList.AddOptions(Utilities.Cores.CoreList);
+            CoreDropdownOptionData = CoreDropdownList.options.ToArray<Dropdown.OptionData>();
         }
     }
 }
