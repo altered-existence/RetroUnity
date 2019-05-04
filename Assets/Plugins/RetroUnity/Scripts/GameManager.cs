@@ -1,23 +1,33 @@
 ﻿using System.IO;
+using AltX.UI;
+using AltX.Utilities;
 using RetroUnity.Utility;
 using UnityEngine;
 
 namespace RetroUnity {
     public class GameManager : MonoBehaviour {
 
-        [SerializeField] public string CoreName = "";
-        [SerializeField] public string RomName = "";
-        private LibretroWrapper.Wrapper wrapper;
+        UIManager uiManager;
+        [SerializeField] public string CoreFileName = "";
+        [SerializeField] public string RomFileName = "";
+
+        public LibretroWrapper.Wrapper wrapper;
 
         private float _frameTimer;
 
         public Material Display;
-        
-        public string romPath; // To change which path ROMs are loaded from. For use with multiple cores.
+
+        public string corePath; // Future-proofing for changing Core Path at Runtime
+        public string romPath; // Change depending which core is loaded
 
         private void Awake() {
-            romPath = (Application.streamingAssetsPath + "/roms");
-            LoadRom(romPath + "/" + RomName); // Call from External Script/UI
+            corePath = (Application.streamingAssetsPath + "/cores");
+            romPath = (Application.streamingAssetsPath + "/roms/snes");
+            Cores.GetInstalledCores();
+            uiManager = gameObject.GetComponent<UIManager>();
+            uiManager.PopulateCoreList();
+            //uiManager.PopulateRomList();
+            LoadRom(romPath + "/" + RomFileName); // Call from External Script/UI
         }
 
         private void Update() {
@@ -36,24 +46,33 @@ namespace RetroUnity {
             }
         }
 
-        public void LoadRom(string path) {
+        public void LoadRom(string romPath) {
 #if !UNITY_ANDROID || UNITY_EDITOR
             // Doesn't work on Android because you can't do File.Exists in StreamingAssets folder.
             // Should figure out a different way to perform check later.
             // If the file doesn't exist the application gets stuck in a loop.
-            if (!File.Exists(path)) {
-                Debug.LogError(path + " not found.");
+            if (!File.Exists(romPath)) {
+                Debug.LogError(romPath + " not found.");
                 return;
             }
 #endif
             Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreName);
+            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreFileName);
+            wrapper.Init(); // Grab Core Info?
 
-            wrapper.Init();
-            wrapper.LoadGame(path);
+            wrapper.LoadGame(romPath);
         }
 
+        //public void LoadSelectedCore()
+        //{
+        //    wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreFileName);
+        //    wrapper.Init(); // Grab Core Info?
+        //}
+        //public void LoadSelectedRom(string romPath)
+        //{
+        //    wrapper.LoadGame(romPath);
+        //}
         private void OnDestroy() {
             WindowsDLLHandler.Instance.UnloadCore();
         }
