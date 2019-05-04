@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9194085832361661893}
   - component: {fileID: 9194085832361661894}
   - component: {fileID: 9194085832361661892}
-  - component: {fileID: 9194085832361661891}
+  - component: {fileID: 2783212063814372448}
   m_Layer: 0
   m_Name: Libretro
   m_TagString: Untagged
@@ -57,11 +57,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ea678dff3796c4c92ab162cb5764bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoreName: genesis_plus_gx_libretro.dll
-  RomName: genesis/Herzog Zwei.smd
+  CoreFileName: snes9x_libretro.dll
+  RomFileName: Aladdin.smc
   Display: {fileID: 2100000, guid: ea16435dffa3e34408933b59f313504c, type: 2}
-  romPath: roms
---- !u!114 &9194085832361661891
+  romPath: 
+--- !u!114 &2783212063814372448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,12 +70,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9194085832361661895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1744e87818ee5bc499073efe96e41433, type: 3}
+  m_Script: {fileID: 11500000, guid: d4668ca7a5a1a094eb9988094732ab9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoreDropdownList: {fileID: 0}
+  CoreDropdownOptionData: []
+  RomButtonPrefab: {fileID: 8269648274656909133, guid: c922dd186a0f2dc4ca28ffcf96dd5ce7,
+    type: 3}
   CoreInput: {fileID: 0}
   CoreInputText: {fileID: 0}
   CoreNameText: {fileID: 0}
   RomInput: {fileID: 0}
   RomInputText: {fileID: 0}
-  gameManager: {fileID: 9194085832361661892}
+  gameManager: {fileID: 0}
+  platformInfo: 
+  platformInfoText: {fileID: 0}
