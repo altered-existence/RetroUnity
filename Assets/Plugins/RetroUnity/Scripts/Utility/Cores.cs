@@ -17,6 +17,8 @@ namespace AltX.Utilities
         public static UIManager uiManager;
         public static string path;
         public int coreArrayIndex;
+        public string[] coreListArray;
+        public string[] coreNameArray;
 
         private static List<string> coreList = new List<string>();
 

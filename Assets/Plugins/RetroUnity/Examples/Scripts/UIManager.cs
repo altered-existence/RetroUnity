@@ -36,7 +36,7 @@ namespace AltX.UI
         }
         public string CoreNameChanged()
         {
-            CoreInput.text = gameManager.CoreName;
+            CoreInput.text = gameManager.CoreFileName;
             return CoreInput.text;
         }
         public void RomNameChanged()
@@ -49,7 +49,7 @@ namespace AltX.UI
         }
         public void OnCoreDropdownChange()
         {
-            gameManager.CoreName = CoreDropdownOptionData[CoreDropdownList.value].text;
+            gameManager.CoreFileName = CoreDropdownOptionData[CoreDropdownList.value].text;
             CoreNameText.text = CoreNameChanged().TrimEnd('_', 'l', 'i', 'b', 'r', 'e', 't', 'r', 'o', '.','d','l','l').ToUpper();
         }
         public void OnRomDropdownChange()

@@ -9,9 +9,11 @@ namespace RetroUnity {
     {
         //readonly Cores cores;
         UIManager uiManager;
-        [SerializeField] public string CoreName = "";
+        [SerializeField] public string CoreFileName = "";
+        [SerializeField] public string CoreInfoName = "";
         [SerializeField] public string RomName = "";
-        [HideInInspector] public string corePath; // Future-proofing for changing Core Path at Runtime
+        //[HideInInspector]
+        public string corePath; // Future-proofing for changing Core Path at Runtime
         public string romPath; // Change depending which core is loaded
 
         public LibretroWrapper.Wrapper wrapper;
@@ -22,7 +24,7 @@ namespace RetroUnity {
         //public Texture2D DisplayTexture; // TESTING
 
 
-        
+
         private void Awake() {
             corePath = (Application.streamingAssetsPath + "/cores");
             romPath = (Application.streamingAssetsPath + "/roms"); // SNES = roms/snes | Genesis = roms/genesis | Gameboy = roms/gb(a/c)
@@ -62,12 +64,20 @@ namespace RetroUnity {
 #endif
             Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + corePath + "/" + CoreName);
+            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + corePath + "/" + CoreFileName);
 
             wrapper.Init();
             wrapper.LoadGame(path);
         }
-
+        //public void LoadSelectedCore()
+        //{
+        //    wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreFileName);
+        //    wrapper.Init(); // Grab Core Info?
+        //}
+        //public void LoadSelectedRom(string romPath)
+        //{
+        //    wrapper.LoadGame(romPath);
+        //}
         private void OnDestroy() {
             WindowsDLLHandler.Instance.UnloadCore();
         }
