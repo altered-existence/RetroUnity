@@ -1,0 +1,11 @@
+libwinpthread-1.dll
+https://wikidll.com/download/13436
+
+retroarch themes
+https://github.com/libretro/retroarch-assets/archive/master.zip
+
+Ozone:
+https://github.com/libretro/retroarch-assets/tree/master/ozone
+
+Baxy:
+https://github.com/baxysquare/baxy-retroarch-themes/archive/master.zip
