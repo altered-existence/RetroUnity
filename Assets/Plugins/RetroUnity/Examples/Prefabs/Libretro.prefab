@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 9194085832361661893}
   - component: {fileID: 9194085832361661894}
   - component: {fileID: 9194085832361661892}
-  - component: {fileID: 3392279732005789326}
+  - component: {fileID: 2788671170840875361}
+  - component: {fileID: 145157808}
   m_Layer: 0
   m_Name: Libretro
   m_TagString: Untagged
@@ -62,8 +63,8 @@ MonoBehaviour:
   RomName: snes/Aladdin.smc
   corePath: 
   romPath: 
-  Display: {fileID: 2100000, guid: 4203bbcfaa579a942b9f505c8e64b51d, type: 2}
---- !u!114 &3392279732005789326
+  Display: {fileID: 2100000, guid: d03dbcabe115eb74aa063e1429b6b2a1, type: 2}
+--- !u!114 &2788671170840875361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,15 +73,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 9194085832361661895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54dfaff2a12c4f140b56eb805333c9cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1744e87818ee5bc499073efe96e41433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CoreDropdownList: {fileID: 0}
+  CoreDropdownOptionData: []
+  RomDropdownList: {fileID: 0}
+  RomDropdownOptionData: []
   CoreInput: {fileID: 0}
   CoreInputText: {fileID: 0}
   CoreNameText: {fileID: 0}
   RomInput: {fileID: 0}
   RomInputText: {fileID: 0}
-  gameManager: {fileID: 9194085832361661892}
+  gameManager: {fileID: 0}
+  platformInfo: 
+  platformInfoText: {fileID: 0}
+--- !u!114 &145157808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194085832361661895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1744e87818ee5bc499073efe96e41433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoreDropdownList: {fileID: 0}
+  CoreDropdownOptionData: []
+  RomDropdownList: {fileID: 0}
+  RomDropdownOptionData: []
+  CoreInput: {fileID: 0}
+  CoreInputText: {fileID: 0}
+  CoreNameText: {fileID: 0}
+  RomInput: {fileID: 0}
+  RomInputText: {fileID: 0}
+  gameManager: {fileID: 0}
   platformInfo: 
   platformInfoText: {fileID: 0}

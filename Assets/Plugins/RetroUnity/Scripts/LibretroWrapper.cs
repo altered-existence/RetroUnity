@@ -158,6 +158,7 @@ namespace RetroUnity {
 
             public unsafe void Init() {
                 int apiVersion = Libretro.RetroApiVersion();
+                
                 SystemInfo info = new SystemInfo();
                 Libretro.RetroGetSystemInfo(ref info);
 
@@ -166,6 +167,7 @@ namespace RetroUnity {
                 string validExtensions = Marshal.PtrToStringAnsi((IntPtr)info.valid_extensions);
                 _requiresFullPath = info.need_fullpath;
                 bool blockExtract = info.block_extract;
+                
 
                 Debug.Log("Core information:");
                 Debug.Log("API Version: " + apiVersion);

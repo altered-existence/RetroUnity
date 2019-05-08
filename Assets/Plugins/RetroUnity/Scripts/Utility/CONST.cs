@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AltX
+namespace AltX.Manager
 {
     public class CONST : MonoBehaviour
     {
@@ -11,24 +11,37 @@ namespace AltX
 
         public string corePlatform;
 
+        public static string[] platforms;
+        public static Sprite[] platformIcons;
+
         public string snes = "snes";
+        public Sprite snesIcon;
         public string genesis = "genesis";
+        public Sprite genesisIcon;
         public string gameBoy = "gba";
+        public Sprite gameBoyIcon;
+        public string doom = "doom";
+        public Sprite doomIcon;
 
         void Start()
         {
             // ---> SNES Cores
-            if (gameManager.CoreName == "snes9x" + "*" + ".dll")
+            if (gameManager.CoreFileName == "snes9x" + "*" + ".dll")
             {
                 corePlatform = snes;
             }
             // ---> Genesis Cores
-            if (gameManager.CoreName == "genesis" + "*" + ".dll")
+            if (gameManager.CoreFileName == "genesis" + "*" + ".dll")
             {
                 corePlatform = genesis;
             }
             // ---> Gameboy Cores
-            if (gameManager.CoreName == "*" + "gba" + "*" + ".dll")
+            if (gameManager.CoreFileName == "*" + "gba" + "*" + ".dll")
+            {
+                corePlatform = gameBoy;
+            }
+            // ---> DOOM Cores
+            if (gameManager.CoreFileName == "prboom_libretro.dll")
             {
                 corePlatform = gameBoy;
             }
@@ -37,6 +50,21 @@ namespace AltX
             {
                 corePlatform = "LibRetro";
             }
+
+            // ---> ROM File Extensions
+            if (gameManager.RomName == "*.smc" || gameManager.RomName == "*.SMC")
+            {
+                corePlatform = snes;
+            }
+            if (gameManager.RomName == "*.smd" || gameManager.RomName == "*.SMD")
+            {
+                corePlatform = genesis;
+            }
+            if (gameManager.RomName == "*.wad" || gameManager.RomName == "*.WAD")
+            {
+                corePlatform = "DOOM";
+            }
+            //gameManager.romPath = gameManager.romPath + "/" + corePlatform;
         }
     }
 }
