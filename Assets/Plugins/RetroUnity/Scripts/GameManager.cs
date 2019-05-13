@@ -32,7 +32,7 @@ namespace RetroUnity {
             uiManager = gameObject.GetComponent<UIManager>();
             uiManager.PopulateCoreList();
             uiManager.PopulateRomList();
-            //LoadRom(romPath + "/" + RomName); // Call from External Script/UI
+            LoadRom(romPath + "/" + RomName); // Call from External Script/UI
         }
 
         private void Update() {
@@ -64,7 +64,7 @@ namespace RetroUnity {
 #endif
             Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + corePath + "/" + CoreFileName);
+            wrapper = new LibretroWrapper.Wrapper(corePath + "/" + CoreFileName);
 
             wrapper.Init();
             wrapper.LoadGame(path);

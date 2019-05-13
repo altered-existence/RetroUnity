@@ -46,10 +46,9 @@ namespace AltX.Utilities
                 {
                     foreach (FileInfo f in info)
                     {
-                        //coreArrayIndex = coreArrayIndex + 1;
                         RomList.Add(f.Name);
                         Debug.Log(f.Name);
-                        //File.AppendText(Application.streamingAssetsPath + "/corelist.txt");
+                        //File.AppendText(path + "/romlist.txt");
                     }
                 }
             }
@@ -60,7 +59,7 @@ namespace AltX.Utilities
         }
         public static string GetPath()
         {
-            path = (Application.streamingAssetsPath + "/roms");
+            path = (Application.streamingAssetsPath + "/roms/snes");
             return path;
         }
     }

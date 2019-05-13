@@ -11,15 +11,17 @@ namespace AltX.UI
 {
     public class UIManager : MonoBehaviour
     {
+        // Dropdowns
         public Dropdown CoreDropdownList;
         public Dropdown.OptionData[] CoreDropdownOptionData;
         public Dropdown RomDropdownList;
         public Dropdown.OptionData[] RomDropdownOptionData;
-        public InputField CoreInput;
-        public Text CoreInputText;
+        // Lists
+        public GameObject CoreButtonListObject;
+        public GameObject ROMButtonListObject;
+
         public Text CoreNameText;
-        public InputField RomInput;
-        public Text RomInputText;
+
         public GameManager gameManager;
         public LibretroWrapper.Wrapper wrapper;
 
@@ -34,15 +36,6 @@ namespace AltX.UI
             platformInfo = (Application.platform).ToString();
             platformInfoText.text = platformInfo;
         }
-        public string CoreNameChanged()
-        {
-            CoreInput.text = gameManager.CoreFileName;
-            return CoreInput.text;
-        }
-        public void RomNameChanged()
-        {
-            RomInput.text = gameManager.RomName;
-        }
         public void StartButtonPressed()
         {
             gameManager.LoadRom(gameManager.romPath + "/" + gameManager.RomName);
@@ -50,12 +43,11 @@ namespace AltX.UI
         public void OnCoreDropdownChange()
         {
             gameManager.CoreFileName = CoreDropdownOptionData[CoreDropdownList.value].text;
-            CoreNameText.text = CoreNameChanged().TrimEnd('_', 'l', 'i', 'b', 'r', 'e', 't', 'r', 'o', '.','d','l','l').ToUpper();
+            
         }
         public void OnRomDropdownChange()
         {
             gameManager.RomName = RomDropdownOptionData[RomDropdownList.value].text;
-            RomNameChanged();
         }
         public void PopulateCoreList()
         {
