@@ -1,5 +1,5 @@
-# **Retro**Unity
-## **[Unity](https://unity.com)** Front-End for the **[LibRetro API](https://github.com/libretro)**
+# RetroUnity
+### [Unity](https://unity.com) Front-End for the [LibRetro API](https://github.com/libretro)
 
 ![](https://img.shields.io/badge/unity-2018.3%2B-blue.svg)
 
@@ -7,51 +7,34 @@
 
 
 -----
+## See:
+**[Instructions](Instructions.md)**
 
-
-## Instructions:
-
-- Add core .dll's to "StreamingAssets/cores"
-- Add ROM files to "StreaminAssets/roms/(PLATFORM)""
-   - Super Nintendo ROMs would go in "StreamingAssets/roms/snes"
-   - Sega Genesis ROMs would go in "StreamingAssets/roms/genesis"
-- Play!
 -----
 
 ## Cores Tested:
 
 [x] - snes9x_libretro.dll
 
-[-] - genesis_plus_gx_libretro.dll
-
-[-] - gearsystem_libretro.dll
-
-[-] - mednafen_gba_libretro.dll
-
 -----
-
-
 ## Changes:
-
-**05.03.2019**
-  - Replace Example Models
-  - Use 2D Mode for Example
-  - Add function to list core libs in "cores" folder
-    - Cores are listed in Dropdown
-  - Replace CoreInputField with CoreDropdown
+- **05.13.2019**
+  - Removed Example Models
+  - Rework towards Pure-2D Project
+    - (Maybe Add 3D Scene Option Later)
 
 
-**05.02.2019**
-  - Add UI Text Input Field for Core and ROM Selection
-    - Example Core: "snes9x_libretro.dll"
-    - Example ROM: "snes/Super Something World.smc"
+- **05.02.2019**
+ - Add UI Text Input Field for Core and ROM Selection
+   - Example Core: "snes9x_libretro.dll"
+   - Example ROM: "snes/Super Something World.smc"
 
 
-**05.01.2019**
-  - Update to Unity 2018.3.14f1
-  - Allow changing loaded Core
-  - Allow changing loaded ROM
-  - Add ability to render to 2D Objects
+- **05.01.2019**
+ - Update to Unity 2018.3.14f1
+ - Allow changing loaded Core
+ - Allow changing loaded ROM
+ - Add ability to render to 2D Objects
 
 ## TODO:
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9194085832361661895
+--- !u!1 &6064445642810235303
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9194085832361661893}
-  - component: {fileID: 9194085832361661894}
-  - component: {fileID: 9194085832361661892}
-  - component: {fileID: 2788671170840875361}
+  - component: {fileID: 6064445642810235323}
+  - component: {fileID: 6064445642810235322}
+  - component: {fileID: 6064445641107168729}
+  - component: {fileID: 6064445642810235321}
   m_Layer: 0
   m_Name: Libretro
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9194085832361661893
+--- !u!4 &6064445642810235323
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9194085832361661895}
+  m_GameObject: {fileID: 6064445642810235303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,26 +33,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9194085832361661894
+--- !u!114 &6064445642810235322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9194085832361661895}
+  m_GameObject: {fileID: 6064445642810235303}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa23bc7544cb7424d82395ceb802c073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coreName: 
---- !u!114 &9194085832361661892
+--- !u!114 &6064445641107168729
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9194085832361661895}
+  m_GameObject: {fileID: 6064445642810235303}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ea678dff3796c4c92ab162cb5764bd, type: 3}
@@ -64,13 +64,13 @@ MonoBehaviour:
   corePath: 
   romPath: 
   Display: {fileID: 2100000, guid: d03dbcabe115eb74aa063e1429b6b2a1, type: 2}
---- !u!114 &2788671170840875361
+--- !u!114 &6064445642810235321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9194085832361661895}
+  m_GameObject: {fileID: 6064445642810235303}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1744e87818ee5bc499073efe96e41433, type: 3}
@@ -80,11 +80,9 @@ MonoBehaviour:
   CoreDropdownOptionData: []
   RomDropdownList: {fileID: 0}
   RomDropdownOptionData: []
-  CoreInput: {fileID: 0}
-  CoreInputText: {fileID: 0}
+  CoreButtonListObject: {fileID: 0}
+  ROMButtonListObject: {fileID: 0}
   CoreNameText: {fileID: 0}
-  RomInput: {fileID: 0}
-  RomInputText: {fileID: 0}
-  gameManager: {fileID: 9194085832361661892}
+  gameManager: {fileID: 6064445641107168729}
   platformInfo: 
   platformInfoText: {fileID: 0}

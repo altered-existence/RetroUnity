@@ -17,8 +17,8 @@ namespace AltX.UI
         public Dropdown RomDropdownList;
         public Dropdown.OptionData[] RomDropdownOptionData;
         // Lists
-        public GameObject CoreButtonListObject;
-        public GameObject ROMButtonListObject;
+        //public GameObject CoreButtonListObject;
+        //public GameObject ROMButtonListObject;
 
         public Text CoreNameText;
 
