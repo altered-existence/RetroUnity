@@ -15,7 +15,7 @@ namespace AltX.Utilities
     {
         public GameManager gameManager;
         public static UIManager uiManager;
-        public static string corePath;
+        public static string path;
         public int coreArrayIndex;
         public string[] coreListArray;
         public string[] coreNameArray;
@@ -43,8 +43,8 @@ namespace AltX.Utilities
         {
             try
             {
-                GetCorePath();
-                DirectoryInfo dir = new DirectoryInfo(corePath);
+                GetPath();
+                DirectoryInfo dir = new DirectoryInfo(path);
                 FileInfo[] info = dir.GetFiles("*.dll");
 
                 if(info.Length != 0)
@@ -63,17 +63,10 @@ namespace AltX.Utilities
                 Debug.Log(e);
             }
     }
-        public static string GetCorePath()
+        public static string GetPath()
         {
-            corePath = (Application.streamingAssetsPath + "/cores");
-            if (!File.Exists(corePath + "*.dll"))
-            {
-                Debug.LogError("----> No Cores ");
-                Debug.LogError("----> found in /cores folder");
-                return "ERROR";
-            }
-            return corePath;
+            path = (Application.streamingAssetsPath + "/cores");
+            return path;
         }
     }
 }
-

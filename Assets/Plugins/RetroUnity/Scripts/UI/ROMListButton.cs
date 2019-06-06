@@ -29,9 +29,8 @@ namespace AltX.UI
         public void OnPressed()
         {
             gameManager.CoreFileName = coreFileName;
-            gameManager.RomFileName = romFileName;
-            gameManager.LoadRom(gameManager.romPath + "/snes/" + gameManager.RomFileName);
+            gameManager.RomName = romFileName;
+            gameManager.LoadRom(gameManager.romPath + "/snes/" + gameManager.RomName);
         }
     }
 }
-

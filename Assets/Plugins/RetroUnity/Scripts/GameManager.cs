@@ -3,31 +3,38 @@ using AltX.UI;
 using AltX.Utilities;
 using RetroUnity.Utility;
 using UnityEngine;
+using AltX.Utilities;
+using AltX.UI;
 
 namespace RetroUnity {
-    public class GameManager : MonoBehaviour {
-
+    public class GameManager : MonoBehaviour
+    {
+        //readonly Cores cores;
         UIManager uiManager;
         [SerializeField] public string CoreFileName = "";
-        [SerializeField] public string RomFileName = "";
+        [SerializeField] public string CoreInfoName = "";
+        [SerializeField] public string RomName = "";
+        //[HideInInspector]
+        public string corePath; // Future-proofing for changing Core Path at Runtime
+        public string romPath; // Change depending which core is loaded
 
         public LibretroWrapper.Wrapper wrapper;
 
         private float _frameTimer;
 
-        public Material Display;
+        public Material Display; // Changed to Material to support 2D Renderers
+        //public Texture2D DisplayTexture; // TESTING
 
-        public string corePath; // Future-proofing for changing Core Path at Runtime
-        public string romPath; // Change depending which core is loaded
+
 
         private void Awake() {
             corePath = (Application.streamingAssetsPath + "/cores");
-            romPath = (Application.streamingAssetsPath + "/roms/snes");
+            romPath = (Application.streamingAssetsPath + "/roms"); // SNES = roms/snes | Genesis = roms/genesis | Gameboy = roms/gb(a/c)
             Cores.GetInstalledCores();
             uiManager = gameObject.GetComponent<UIManager>();
             uiManager.PopulateCoreList();
-            //uiManager.PopulateRomList();
-            LoadRom(romPath + "/" + RomFileName); // Call from External Script/UI
+            uiManager.PopulateRomList();
+            LoadRom(romPath + "/" + RomName); // Call from External Script/UI
         }
 
         private void Update() {
@@ -43,6 +50,7 @@ namespace RetroUnity {
             }
             if (LibretroWrapper.tex != null) {
                 Display.mainTexture = LibretroWrapper.tex;
+                //DisplayTexture = LibretroWrapper.tex;
             }
         }
 
@@ -58,12 +66,10 @@ namespace RetroUnity {
 #endif
             Display.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreFileName);
-            wrapper.Init(); // Grab Core Info?
+            wrapper = new LibretroWrapper.Wrapper(corePath + "/" + CoreFileName);
 
             wrapper.LoadGame(romPath);
         }
-
         //public void LoadSelectedCore()
         //{
         //    wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/cores/" + CoreFileName);
