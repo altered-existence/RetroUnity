@@ -6,4 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Plugins/RetroUnity/Examples/Scenes/Main.unity
+    path: Assets/Plugins/RetroUnity-2D/scenes/2DMain.unity
+    guid: 42f21a396cad22b4bac3a782e3e224dd
+  m_configObjects: {}
