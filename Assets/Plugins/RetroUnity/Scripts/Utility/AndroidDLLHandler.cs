@@ -36,7 +36,10 @@ namespace RetroUnity.Utility {
 
         public bool LoadCore(string dllPath) {
             // TODO: Not working yet.
-            using (var www = new WWW(dllPath)) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            using (WWW www = new WWW(dllPath))
+            {
+#pragma warning restore CS0618 // Type or member is obsolete
                 while (!www.isDone) { }
                 currentAssembly = Assembly.Load(www.bytes);
             }
