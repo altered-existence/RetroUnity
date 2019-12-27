@@ -5,8 +5,8 @@ using UnityEngine;
 namespace RetroUnity {
     public class GameManager : MonoBehaviour {
 
-        [SerializeField] private string CoreName = "snes9x_libretro.dll";
-        [SerializeField] private string RomName = "Chrono Trigger (USA).sfc";
+        [SerializeField] private string CoreName = "blastem_libretro.dll";
+        [SerializeField] private string RomName = "LW_build_0479.bin";
         private LibretroWrapper.Wrapper wrapper;
 
         private float _frameTimer;
