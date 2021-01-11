@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace RetroUnity {
     public class GameManager : MonoBehaviour {
-
         [SerializeField] private string CoreName = "blastem_libretro.dll";
         [SerializeField] private string RomName = "LW_build_0479.bin";
+
         private LibretroWrapper.Wrapper wrapper;
 
         private float _frameTimer;
@@ -34,25 +34,24 @@ namespace RetroUnity {
         }
 
         public void LoadRom(string path) {
-#if !UNITY_ANDROID || UNITY_EDITOR
-            // Doesn't work on Android because you can't do File.Exists in StreamingAssets folder.
-            // Should figure out a different way to perform check later.
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
             // If the file doesn't exist the application gets stuck in a loop.
-            if (!File.Exists(path)) {
+            if (!File.Exists(path))
+            {
                 Debug.LogError(path + " not found.");
                 return;
             }
 #endif
             Display.material.color = Color.white;
 
-            wrapper = new LibretroWrapper.Wrapper(Application.streamingAssetsPath + "/" + CoreName);
+            wrapper = new LibretroWrapper.Wrapper(CoreName);
 
             wrapper.Init();
             wrapper.LoadGame(path);
         }
 
         private void OnDestroy() {
-            WindowsDLLHandler.Instance.UnloadCore();
+            wrapper.DLLHandler.UnloadCore();
         }
     }
 }
