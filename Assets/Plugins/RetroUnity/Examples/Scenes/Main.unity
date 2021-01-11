@@ -273,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635089073}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 6.2, z: -0.16}
+  m_LocalPosition: {x: 0, y: 6.2, z: -0.17}
   m_LocalScale: {x: 14.1, y: 7.3, z: 1}
   m_Children: []
   m_Father: {fileID: 589599783}
@@ -517,8 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ea678dff3796c4c92ab162cb5764bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoreName: snes9x_libretro
-  RomName: Chrono Trigger (USA).sfc
+  CoreName: blastem_libretro.dll
+  RomName: LW_build_0479.bin
   Display: {fileID: 635089074}
 --- !u!1001 &1178825821
 PrefabInstance:
@@ -659,7 +659,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702816979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 1.28, z: -2.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

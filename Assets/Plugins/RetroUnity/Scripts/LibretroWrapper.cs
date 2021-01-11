@@ -21,8 +21,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using RetroUnity.Utility;
 using UnityEngine;
+using Unity.Collections;
+using UnityEngine.Profiling;
+using Unity.Jobs;
 
 namespace RetroUnity {
     public class LibretroWrapper : MonoBehaviour {
@@ -207,7 +211,6 @@ namespace RetroUnity {
             }
 
             private unsafe void RetroVideoRefresh(void* data, uint width, uint height, uint pitch) {
-
                 // Process Pixels one by one for now...this is not the best way to do it 
                 // should be using memory streams or something
 
@@ -218,10 +221,10 @@ namespace RetroUnity {
                 //Get the array from unmanaged memory as a pointer
                 var pixels = (IntPtr)data;
                 //Gets The pointer to the row start to use with the pitch
-                //IntPtr rowStart = pixels;
+                IntPtr rowStart = pixels;
 
                 //Get the size to move the pointer
-                //int size = 0;
+                int size = 24;
 
                 uint i;
                 uint j;
@@ -260,34 +263,41 @@ namespace RetroUnity {
                         }
                         break;
                     case PixelFormat.RetroPixelFormatXRGB8888:
-
                         LibretroWrapper.w = Convert.ToInt32(width);
                         LibretroWrapper.h = Convert.ToInt32(height);
-                        if (tex == null) {
-                            tex = new Texture2D(LibretroWrapper.w, LibretroWrapper.h, TextureFormat.RGB565, false);
+                        if (tex == null||tex.height!= LibretroWrapper.h ||tex.width!=LibretroWrapper.w) {
+                            tex = new Texture2D(LibretroWrapper.w, LibretroWrapper.h, TextureFormat.ARGB32, false);
                         }
                         LibretroWrapper.p = Convert.ToInt32(pitch);
 
-                        //size = Marshal.SizeOf(typeof(int));
-                        for (i = 0; i < height; i++) {
-                            for (j = 0; j < width; j++) {
-                                int packed = Marshal.ReadInt32(pixels);
-                                _frameBuffer[i * width + j] = new Pixel {
-                                    Alpha = 1,
-                                    Red = ((packed >> 16) & 0x00FF) / 255.0f,
-                                    Green = ((packed >> 8) & 0x00FF) / 255.0f,
-                                    Blue = (packed & 0x00FF) / 255.0f
-                                };
-                                var color = new Color(((packed >> 16) & 0x00FF) / 255.0f, ((packed >> 8) & 0x00FF) / 255.0f, (packed & 0x00FF) / 255.0f, 1.0f);
-                                tex.SetPixel((int)i, (int)j, color);
-                                //pixels = (IntPtr)((int)pixels + size);
-                            }
-                            //pixels = (IntPtr)((int)rowStart + pitch);
-                            //rowStart = pixels;
+                        size = Marshal.SizeOf(typeof(int));
+                        //Get Pixel Array from Libretro
+                        Int32[] pixelarr = new Int32[width*height];
+                        Marshal.Copy(pixels, pixelarr, 0, (int)(width * height));
 
-                        }
+                        //Create Color Array 
+                        Color32[] color32arr = new Color32[width*height];
 
-                        tex.filterMode = FilterMode.Trilinear;
+                        //create job handles list
+                        JobHandle jobHandle = new JobHandle();
+                        //create native pixel array and color array for returning from unity Job
+                        var nativePixelArray = new NativeArray<Int32>(pixelarr, Allocator.TempJob);
+                        var nativeColorArray = new NativeArray<Color32>(color32arr, Allocator.TempJob);
+
+                        var job = new RGB8888Job
+                        {
+                            pixelarray = nativePixelArray,
+                            color32array = nativeColorArray
+                        };
+                            jobHandle= (job.Schedule(pixelarr.Length, 1000));
+                        jobHandle.Complete();
+                        nativeColorArray.CopyTo(color32arr);                        
+                        nativePixelArray.Dispose();
+                        nativeColorArray.Dispose();
+
+                        
+                        tex.SetPixels32(color32arr, 0);
+                        tex.filterMode = FilterMode.Trilinear;                        
                         tex.Apply();
                         break;
 
@@ -328,6 +338,14 @@ namespace RetroUnity {
 
             private void RetroAudioSample(short left, short right) {
                 // Unused.
+                float value = left * -0.000030517578125f;
+                value = Mathf.Clamp(value, -1.0f, 1.0f); // Unity's audio only takes values between -1 and 1.
+                AudioBatch.Add(value);
+
+                value = right * -0.000030517578125f;
+                value = Mathf.Clamp(value, -1.0f, 1.0f); // Unity's audio only takes values between -1 and 1.
+                AudioBatch.Add(value);
+
             }
         
             private unsafe void RetroAudioSampleBatch(short* data, uint frames) {
@@ -470,6 +488,8 @@ namespace RetroUnity {
                 _av = new SystemAVInfo();
                 Libretro.RetroGetSystemAVInfo(ref _av);
 
+                
+
                 var audioConfig = AudioSettings.GetConfiguration();
                 audioConfig.sampleRate = (int)_av.timing.sample_rate;
                 AudioSettings.Reset(audioConfig);
@@ -482,7 +502,7 @@ namespace RetroUnity {
                 Debug.Log("Aspect ratio: " + _av.geometry.aspect_ratio);
                 Debug.Log("Geometry:");
                 Debug.Log("Target fps: " + _av.timing.fps);
-                Debug.Log("Sample rate " + _av.timing.sample_rate);
+                Debug.Log("Sample rate " + _av.timing.sample_rate);               
                 return ret;
             }
         }
